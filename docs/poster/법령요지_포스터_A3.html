@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>산안법 법령요지 포스터</title>
+<style>
+  @font-face { font-family: "NotoKR"; font-weight: 400; src: url(fonts/noto-sans-kr-korean-400-normal.woff2) format("woff2"); unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7A3, U+3000-303F; }
+  @font-face { font-family: "NotoKR"; font-weight: 500; src: url(fonts/noto-sans-kr-korean-500-normal.woff2) format("woff2"); unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7A3, U+3000-303F; }
+  @font-face { font-family: "NotoKR"; font-weight: 700; src: url(fonts/noto-sans-kr-korean-700-normal.woff2) format("woff2"); unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7A3, U+3000-303F; }
+  @font-face { font-family: "NotoKR"; font-weight: 900; src: url(fonts/noto-sans-kr-korean-900-normal.woff2) format("woff2"); unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7A3, U+3000-303F; }
+  @font-face { font-family: "NotoKR"; font-weight: 400; src: url(fonts/noto-sans-kr-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "NotoKR"; font-weight: 500; src: url(fonts/noto-sans-kr-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "NotoKR"; font-weight: 700; src: url(fonts/noto-sans-kr-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "NotoKR"; font-weight: 900; src: url(fonts/noto-sans-kr-latin-900-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+
+  :root {
+    --navy: #13233f;
+    --navy-2: #24395f;
+    --ink: #1b1f27;
+    --muted: #5a6273;
+    --line: #d5dae3;
+    --paper: #ffffff;
+    --tint: #f3f5f9;
+    --yellow: #ffc61a;
+    --red: #d6332b;
+    --green: #1f8a4c;
+  }
+  @page { size: 297mm 420mm; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); }
+  body {
+    width: 297mm; height: 420mm; overflow: hidden;
+    font-family: "NotoKR", "WenQuanYi Zen Hei", sans-serif;
+    color: var(--ink); font-size: 11.5pt; line-height: 1.45;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    display: flex; flex-direction: column;
+  }
+
+  /* 헤더 */
+  header {
+    background: var(--navy); color: #fff;
+    padding: 9mm 16mm 7mm; position: relative;
+  }
+  header::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4mm; height: 4mm;
+    background: repeating-linear-gradient(135deg, var(--yellow) 0 7mm, var(--navy) 7mm 14mm);
+  }
+  .eyebrow { display: inline-block; background: var(--yellow); color: var(--navy); font-weight: 900; font-size: 12pt; padding: 1.2mm 4mm; border-radius: 1.5mm; letter-spacing: .02em; }
+  h1 { font-size: 36pt; font-weight: 900; line-height: 1.15; margin-top: 3.5mm; letter-spacing: -.02em; }
+  h1 em { font-style: normal; color: var(--yellow); }
+  .sub { margin-top: 3mm; font-size: 13pt; color: #c9d3e6; font-weight: 500; }
+  .hside { position: absolute; top: 9mm; right: 16mm; bottom: 7mm; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; text-align: right; }
+  .hside img { height: 16.9mm; width: auto; display: block; margin: -.95mm -.95mm -.95mm 0; }
+  .hside .hinfo { font-size: 9pt; line-height: 1.65; color: #c9d3e6; }
+  .hside .hinfo b { color: #fff; }
+
+
+  main { flex: 1; padding: 9mm 16mm 9mm; display: flex; flex-direction: column; gap: 5mm; }
+  h2 { font-size: 17pt; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 3mm; margin-bottom: 2.5mm; }
+  h2 .no { background: var(--navy); color: var(--yellow); width: 9mm; height: 9mm; border-radius: 50%; display: inline-grid; place-items: center; font-size: 13pt; }
+
+  /* 타임라인 */
+  .timeline { display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+  .timeline::before { content: ""; position: absolute; top: 5mm; left: 4%; right: 4%; height: 1.2mm; background: var(--line); }
+  .tl { position: relative; text-align: center; padding: 0 1.5mm; }
+  .dot { width: 10mm; height: 10mm; border-radius: 50%; margin: 0 auto 2mm; background: #fff; border: 1.2mm solid var(--navy-2); position: relative; }
+  .tl.now .dot { background: var(--navy); }
+  .tl.key .dot { background: var(--red); border-color: var(--red); }
+  .tl .date { font-weight: 900; font-size: 13pt; color: var(--navy); }
+  .tl.key .date { color: var(--red); }
+  .tl .state { display: inline-block; font-size: 8.5pt; font-weight: 700; padding: .3mm 2mm; border-radius: 1mm; margin: .8mm 0 1.2mm; background: var(--tint); color: var(--muted); }
+  .tl.now .state { background: var(--navy); color: #fff; }
+  .tl.key .state { background: var(--red); color: #fff; }
+  .tl .what { font-size: 10pt; line-height: 1.35; }
+
+  /* 핵심 카드 */
+  .cards { display: grid; grid-template-columns: 1.25fr 1fr; gap: 5mm; }
+  .card { border: .5mm solid var(--line); border-radius: 3mm; padding: 5mm; background: #fff; }
+  .card.hero { border: .9mm solid var(--navy); grid-row: span 2; display: flex; flex-direction: column; align-items: flex-start; }
+  .card.hero > table, .card.hero > .when, .card.hero > .callout { align-self: stretch; }
+  .tag { display: inline-block; font-size: 9pt; font-weight: 700; padding: .5mm 2.5mm; border-radius: 1mm; background: var(--tint); color: var(--navy-2); }
+  .tag.red { background: var(--red); color: #fff; }
+  .card h3 { font-size: 17pt; font-weight: 900; line-height: 1.25; margin: 2mm 0 1.5mm; color: var(--navy); }
+  .card.hero h3 { font-size: 21pt; }
+  .card p { color: var(--ink); }
+  .law { font-size: 9.5pt; color: var(--muted); font-weight: 500; }
+  .callout { margin: 3mm 0; background: var(--yellow); color: var(--navy); border-radius: 2mm; padding: 3.5mm 4.5mm; font-weight: 700; font-size: 12.5pt; line-height: 1.4; }
+  .callout b { font-weight: 900; font-size: 14pt; }
+  table { width: 100%; border-collapse: collapse; }
+  .fine td, .fine th { padding: 1.7mm 2.5mm; border-bottom: .3mm solid var(--line); text-align: left; font-size: 11pt; }
+  .fine th { font-size: 9.5pt; color: var(--muted); font-weight: 700; border-bottom: .5mm solid var(--navy); }
+  .fine td.amt { text-align: right; font-weight: 900; color: var(--red); white-space: nowrap; }
+  .when { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: auto; padding-top: 4mm; }
+  .when div { background: var(--tint); border-radius: 2mm; padding: 3mm; text-align: center; }
+  .when div.me { background: var(--navy); color: #fff; }
+  .when small { display: block; font-size: 9.5pt; opacity: .85; }
+  .when strong { font-size: 16pt; font-weight: 900; }
+  .heat { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; margin-top: 3mm; }
+  .heat div { border-radius: 2mm; padding: 2mm 3mm; background: var(--tint); }
+  .heat div.hot { background: #fde6e4; }
+  .heat b { display: block; font-size: 15pt; font-weight: 900; color: var(--red); }
+  .heat span { font-size: 10pt; }
+  ul.plain { list-style: none; margin-top: 2mm; }
+  ul.plain li { padding-left: 4.5mm; position: relative; margin-bottom: 1mm; font-size: 11pt; }
+  ul.plain li::before { content: ""; position: absolute; left: 0; top: 2.3mm; width: 2mm; height: 2mm; background: var(--yellow); border-radius: .5mm; }
+
+  .minor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .minor .card { padding: 3.5mm 4.5mm; }
+  .minor h4 { font-size: 12pt; font-weight: 900; color: var(--navy); margin: 1mm 0 .5mm; }
+  .minor p { font-size: 10pt; color: var(--muted); }
+
+  /* 체크리스트 */
+  .check th, .check td { border: .3mm solid var(--line); padding: 1.6mm 3mm; font-size: 11pt; vertical-align: middle; }
+  .check thead th { background: var(--navy); color: #fff; font-weight: 700; font-size: 10.5pt; border-color: var(--navy); }
+  .check td.n { width: 9mm; text-align: center; font-weight: 900; color: var(--navy); }
+  .check td.box { width: 21mm; text-align: center; }
+  .check td.box i { display: inline-block; width: 5mm; height: 5mm; vertical-align: middle; border: .5mm solid var(--navy-2); border-radius: 1mm; }
+  .check td.dl { width: 33mm; font-size: 10pt; color: var(--muted); white-space: nowrap; }
+  .check td .crit { display: inline; margin-left: 2mm; font-size: 9pt; color: var(--muted); }
+  .check tbody tr:nth-child(even) td { background: #fafbfd; }
+
+</style>
+</head>
+<body>
+<header>
+  <span class="eyebrow">50인 미만 사업장 필수 확인</span>
+  <h1>산업안전보건법,<br><em>이렇게 달라집니다</em></h1>
+  <p class="sub">2026년 9월 이후 적용 법령요지 · 시행일 확정분만 수록</p>
+  <div class="hside">
+    <img src="img/logo_ulsan_bukgu_white_on_navy.png" alt="울산북구비정규직노동자지원센터">
+    <div class="hinfo">
+      발행 <b>울산북구비정규직노동자지원센터</b><br>
+      <b>기준일 2026.10.13</b> · 공포되어 시행일이 확정된 사항만 수록<br>
+      국회 통과 후 공포 전인 개정안 제외 · 원문 <b>law.go.kr</b>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <h2><span class="no">1</span>시행 일정</h2>
+    <div class="timeline">
+      <div class="tl now"><div class="dot"></div><div class="date">2025.7.17</div><span class="state">시행 중</span><p class="what">폭염작업<br>휴식 의무</p></div>
+      <div class="tl now"><div class="dot"></div><div class="date">2026.6.1</div><span class="state">시행 중</span><p class="what">위험성평가<br>노동자 참여 의무</p></div>
+      <div class="tl now"><div class="dot"></div><div class="date">2026.8.1</div><span class="state">시행 중</span><p class="what">시행규칙 개정<br>(명예감독관·재해조사)</p></div>
+      <div class="tl"><div class="dot"></div><div class="date">2027.1.1</div><span class="state">예정</span><p class="what">위험성평가 과태료<br>50인 이상</p></div>
+      <div class="tl"><div class="dot"></div><div class="date">2027.1.8</div><span class="state">예정</span><p class="what">외국인근로자<br>기초안전보건교육</p></div>
+      <div class="tl key"><div class="dot"></div><div class="date">2028.1.1</div><span class="state">50인 미만</span><p class="what">위험성평가 과태료<br><b>50인 미만 적용</b></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">2</span>꼭 알아야 할 변화</h2>
+    <div class="cards">
+      <article class="card hero">
+        <span class="tag red">2026.6.1 시행 · 이미 의무</span>
+        <h3>위험성평가에<br>노동자가 직접 참여해야 합니다</h3>
+        <p class="law">산업안전보건법 제36조 · 법률 제21374호</p>
+        <div class="callout">과태료만 2028년까지 유예된 것이지<br><b>의무는 지금 이미 적용 중입니다.</b></div>
+        <table class="fine">
+          <thead><tr><th>위반 내용</th><th style="text-align:right">과태료 상한</th></tr></thead>
+          <tbody>
+            <tr><td>위험성평가 미실시</td><td class="amt">1,000만 원</td></tr>
+            <tr><td>노동자 참여 미보장 (근로자대표 요구 시 포함)</td><td class="amt">500만 원</td></tr>
+            <tr><td>결과 미공유 (주지·게시)</td><td class="amt">500만 원</td></tr>
+            <tr><td>결과·조치 기록 미보존</td><td class="amt">300만 원</td></tr>
+          </tbody>
+        </table>
+        <div class="when">
+          <div><small>50인 이상 (건설 50억 이상)</small><strong>2027.1.1</strong></div>
+          <div class="me"><small>50인 미만 · 우리 사업장</small><strong>2028.1.1</strong></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">2027.1.8 시행</span>
+        <h3>외국인근로자<br>기초안전보건교육 의무</h3>
+        <p class="law">법 제31조의2 신설 · 법률 제21853호</p>
+        <ul class="plain">
+          <li>채용 시 공단·등록기관 교육 <b>이수 확인 후 배치</b></li>
+          <li>시행일 이후 채용분부터 적용 · 위반 시 과태료</li>
+          <li>외국어 안전표지·작업수칙 부착 (노력의무)</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">2025.7.17 시행 · 매년 여름</span>
+        <h3>폭염작업 휴식 의무</h3>
+        <p class="law">산업안전보건기준에 관한 규칙</p>
+        <div class="heat">
+          <div><b>31°C 이상</b><span>냉방·통풍, 작업시간 조정, 주기적 휴식</span></div>
+          <div class="hot"><b>33°C 이상</b><span>2시간마다 20분 이상 휴식</span></div>
+        </div>
+        <p class="law" style="margin-top:2mm">체감온도 기준 · 위반 시 5년 이하 징역 또는 5천만 원 이하 벌금</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="minor">
+    <div class="card"><span class="tag">2027.1.8</span><h4>중대재해 현장 훼손 금지</h4><p>원인조사를 방해할 목적으로 사고 현장을 훼손하면 처벌</p></div>
+    <div class="card"><span class="tag">2027.1.8</span><h4>교육기관 사칭 금지</h4><p>등록하지 않은 기관의 안전보건교육기관 사칭 시 500만 원 이하 과태료</p></div>
+    <div class="card"><span class="tag">2026.8.1</span><h4>시행규칙 개정</h4><p>명예산업안전감독관 감독참여 절차, 재해조사보고서 공개 기준 정비</p></div>
+  </section>
+
+  <section>
+    <h2><span class="no">3</span>우리 사업장 지금 할 일</h2>
+    <table class="check">
+      <thead><tr><th>#</th><th style="text-align:left">현장 행동</th><th>기한</th><th>되고 있음</th><th>미비</th><th>해당없음</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>위험성평가에 노동자 참여 (월 1회 TBM 등)<span class="crit">참여자 명단·서명·사진이 있으면 '되고 있음'</span></td><td class="dl">지금</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box" style="background:var(--tint)"></td></tr>
+        <tr><td class="n">2</td><td>위험성평가 결과를 현장에 게시하고 설명<span class="crit">서류철 보관만 하면 '미비'</span></td><td class="dl">지금</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box" style="background:var(--tint)"></td></tr>
+        <tr><td class="n">3</td><td>개선 조치 전후 사진·기록 보관</td><td class="dl">지금</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box" style="background:var(--tint)"></td></tr>
+        <tr><td class="n">4</td><td>외국인 신규채용 시 기초안전보건교육 이수 확인</td><td class="dl">2027.1.8 채용분~</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box"><i></i></td></tr>
+        <tr><td class="n">5</td><td>외국어 안전표지·작업수칙 부착</td><td class="dl">2027.1.8</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box"><i></i></td></tr>
+        <tr><td class="n">6</td><td>중대재해 시 비상연락·현장보존 절차 게시</td><td class="dl">2027.1.8</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box" style="background:var(--tint)"></td></tr>
+        <tr><td class="n">7</td><td>폭염기 온습도계 비치·체감온도 확인·휴식 기록</td><td class="dl">매년 여름</td><td class="box"><i></i></td><td class="box"><i></i></td><td class="box"><i></i></td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+</body>
+</html>
