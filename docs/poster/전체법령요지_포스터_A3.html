@@ -76,7 +76,9 @@
   .pen td.h { color: var(--red); }
   .grp td { background: var(--tint); font-size: 8pt; font-weight: 700; color: var(--muted); padding: .7mm 1.6mm; }
 
-  footer { padding: 2.5mm 0 4.5mm; margin: 0 14mm; font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; gap: 6mm; border-top: .3mm solid var(--line); }
+  footer { padding: 3mm 0 4.5mm; margin: 0 14mm; font-size: 8.5pt; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8mm; border-top: .6mm solid var(--navy); }
+  footer .flogo { height: 14mm; width: auto; display: block; }
+  footer .finfo { text-align: right; line-height: 1.6; }
   footer b { color: var(--ink); }
 </style>
 </head>
@@ -87,7 +89,6 @@
     <h1>산업안전보건법 <em>법령요지</em></h1>
   </div>
   <div class="hcol">
-    <span class="logo-badge"><img src="img/logo_ulsan_bukgu.svg" alt="울산북구비정규직노동자지원센터"></span>
     <p class="hright">사업주는 이 법령의 요지를 근로자가<br>쉽게 볼 수 있는 장소에 게시해야 합니다.<br><b>기준일 2026.10.13</b></p>
   </div>
 </header>
@@ -243,8 +244,11 @@
 </main>
 
 <footer>
-  <span><b>기준일 2026.10.13</b> · 현재 시행 중이거나 시행일이 확정된 법령 기준 요약 · 업종·규모별 세부 기준은 시행령·시행규칙 확인</span>
-  <span>발행 <b>울산북구비정규직노동자지원센터</b> · 원문 <b>law.go.kr</b> · 상담 고용노동부 <b>1350</b></span>
+  <img class="flogo" src="img/logo_ulsan_bukgu.svg" alt="울산북구비정규직노동자지원센터">
+  <div class="finfo">
+    <div>발행 <b>울산북구비정규직노동자지원센터</b> · 원문 <b>law.go.kr</b> · 상담 고용노동부 <b>1350</b></div>
+    <div><b>기준일 2026.10.13</b> · 현재 시행 중이거나 시행일이 확정된 법령 기준 요약 · 업종·규모별 세부 기준은 시행령·시행규칙 확인</div>
+  </div>
 </footer>
 </body>
 </html>
