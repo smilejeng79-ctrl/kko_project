@@ -35,6 +35,10 @@
   h1 em { font-style: normal; color: var(--yellow); }
   .hright { text-align: right; font-size: 10pt; color: #c9d3e6; line-height: 1.55; }
   .hright b { color: #fff; }
+  .hcol { display: flex; flex-direction: column; align-items: flex-end; gap: 2.5mm; }
+
+  .logo-badge { display: inline-block; background: #fff; border-radius: 2.5mm; padding: 2mm 3mm; line-height: 0; }
+  .logo-badge img { height: 13mm; width: auto; display: block; }
 
   /* 의무 주체 */
   .duty { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 3mm; padding: 8mm 14mm 0; }
@@ -82,7 +86,10 @@
     <span class="eyebrow">사업장 게시용 · 산업안전보건법 제34조</span>
     <h1>산업안전보건법 <em>법령요지</em></h1>
   </div>
-  <p class="hright">사업주는 이 법령의 요지를 근로자가<br>쉽게 볼 수 있는 장소에 게시해야 합니다.<br><b>기준일 2026.10.13</b></p>
+  <div class="hcol">
+    <span class="logo-badge"><img src="img/logo_ulsan_bukgu.png" alt="울산북구비정규직노동자지원센터"></span>
+    <p class="hright">사업주는 이 법령의 요지를 근로자가<br>쉽게 볼 수 있는 장소에 게시해야 합니다.<br><b>기준일 2026.10.13</b></p>
+  </div>
 </header>
 
 <section class="duty">
@@ -237,7 +244,7 @@
 
 <footer>
   <span><b>기준일 2026.10.13</b> · 현재 시행 중이거나 시행일이 확정된 법령 기준 요약 · 업종·규모별 세부 기준은 시행령·시행규칙 확인</span>
-  <span>원문 <b>law.go.kr</b> · 상담 고용노동부 <b>1350</b></span>
+  <span>발행 <b>울산북구비정규직노동자지원센터</b> · 원문 <b>law.go.kr</b> · 상담 고용노동부 <b>1350</b></span>
 </footer>
 </body>
 </html>
