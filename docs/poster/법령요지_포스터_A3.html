@@ -49,9 +49,13 @@
   h1 { font-size: 36pt; font-weight: 900; line-height: 1.15; margin-top: 3.5mm; letter-spacing: -.02em; }
   h1 em { font-style: normal; color: var(--yellow); }
   .sub { margin-top: 3mm; font-size: 13pt; color: #c9d3e6; font-weight: 500; }
+  .hside { position: absolute; top: 9mm; right: 16mm; bottom: 7mm; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; text-align: right; }
+  .hside img { height: 15mm; width: auto; display: block; filter: brightness(0) invert(1); }
+  .hside .hinfo { font-size: 9pt; line-height: 1.65; color: #c9d3e6; }
+  .hside .hinfo b { color: #fff; }
 
 
-  main { flex: 1; padding: 8mm 16mm 0; display: flex; flex-direction: column; gap: 4mm; }
+  main { flex: 1; padding: 9mm 16mm 9mm; display: flex; flex-direction: column; gap: 5mm; }
   h2 { font-size: 17pt; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 3mm; margin-bottom: 2.5mm; }
   h2 .no { background: var(--navy); color: var(--yellow); width: 9mm; height: 9mm; border-radius: 50%; display: inline-grid; place-items: center; font-size: 13pt; }
 
@@ -106,7 +110,7 @@
   .minor p { font-size: 10pt; color: var(--muted); }
 
   /* 체크리스트 */
-  .check th, .check td { border: .3mm solid var(--line); padding: 1.15mm 3mm; font-size: 11pt; vertical-align: middle; }
+  .check th, .check td { border: .3mm solid var(--line); padding: 1.6mm 3mm; font-size: 11pt; vertical-align: middle; }
   .check thead th { background: var(--navy); color: #fff; font-weight: 700; font-size: 10.5pt; border-color: var(--navy); }
   .check td.n { width: 9mm; text-align: center; font-weight: 900; color: var(--navy); }
   .check td.box { width: 21mm; text-align: center; }
@@ -115,10 +119,6 @@
   .check td .crit { display: inline; margin-left: 2mm; font-size: 9pt; color: var(--muted); }
   .check tbody tr:nth-child(even) td { background: #fafbfd; }
 
-  footer { margin: 2mm 16mm 0; margin-top: auto; padding: 2.5mm 0 5mm; font-size: 8.5pt; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8mm; border-top: .6mm solid var(--navy); }
-  footer .flogo { height: 12.5mm; width: auto; display: block; }
-  footer .finfo { text-align: right; line-height: 1.6; }
-  footer b { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -126,6 +126,14 @@
   <span class="eyebrow">50인 미만 사업장 필수 확인</span>
   <h1>산업안전보건법,<br><em>이렇게 달라집니다</em></h1>
   <p class="sub">2026년 9월 이후 적용 법령요지 · 시행일 확정분만 수록</p>
+  <div class="hside">
+    <img src="img/logo_ulsan_bukgu_white.svg" alt="울산북구비정규직노동자지원센터">
+    <div class="hinfo">
+      발행 <b>울산북구비정규직노동자지원센터</b><br>
+      <b>기준일 2026.10.13</b> · 공포되어 시행일이 확정된 사항만 수록<br>
+      국회 통과 후 공포 전인 개정안 제외 · 원문 <b>law.go.kr</b>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -211,12 +219,5 @@
   </section>
 </main>
 
-<footer>
-  <img class="flogo" src="img/logo_ulsan_bukgu.svg" alt="울산북구비정규직노동자지원센터">
-  <div class="finfo">
-    <div>발행 <b>울산북구비정규직노동자지원센터</b> · 세부 내용은 국가법령정보센터 <b>law.go.kr</b> 원문 확인</div>
-    <div><b>기준일 2026.10.13</b> · 공포되어 시행일이 확정된 사항만 수록 (국회 통과 후 공포 전인 개정안 제외)</div>
-  </div>
-</footer>
 </body>
 </html>
