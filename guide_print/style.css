@@ -208,3 +208,6 @@ h2.sub{break-before:page}
 /* v5: mirrored tabs — symmetric 8mm side margins */
 @page{size:A4;margin:21mm 8mm 15mm 8mm}
 .area{padding:0 10mm}
+/* v6: left ring binding, duplex — gutter handled by mirrored @page :left/:right margins */
+.cover .cv-top,.cover .toc{padding-left:25mm;padding-right:18mm}
+.cover .cv-foot{left:25mm;right:18mm}

@@ -31,7 +31,8 @@ def rich(s):
 TABS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'ap']
 TABNAME = {'a1': '관리체계', 'a2': '위험성평가', 'a3': '비상대응', 'a4': '작업환경측정', 'a5': '건강검진', 'a6': '안전보건교육', 'a7': '현장조치', 'ap': '부록'}
 TAB_TOP, TAB_STEP, TAB_H = 6, 31.5, 29   # mm, measured from the bottom edge of the header margin (21mm)
-IND = {'부록': '-2.8mm', 'GUIDE': '-4.6mm'}
+NUMW = {'부록': 5.6, 'GUIDE': 9.2}   # approx label width (mm) for centring in the 16mm outer box
+GUTTER, OUTER = 15, 8   # mm page margins: binding side (ring holes) / outer side (tabs)
 FOOT = '소규모 제조업 산업안전보건법 준수사항 안내'
 
 
@@ -41,28 +42,43 @@ def tab_label(k):
 
 
 def page_css():
+    """Left ring binding, duplex: odd (right) pages bind on the left, even (left) pages bind on the right.
+    Area number box, index tab and page number always sit on the outer edge."""
     out = []
+    TW = 210 - GUTTER - 2 * OUTER - OUTER      # title box width (mm)
     for k, (num, title, dark, badge) in AREAS.items():
-        tab = ''
+        half = NUMW.get(num, 6.4) / 2
+        nsz = '10.5pt' if len(num) <= 2 else '7.5pt'
+        box = 'margin-bottom:9mm;vertical-align:middle'
+        numstyle = 'font:700 %s P;color:#fff;white-space:nowrap;text-align:left' % nsz
+        ttl = 'content:"%s";width:%smm;%s;background:%s;font:700 10pt P;color:#fff;text-align:left' % (title, TW, box, NAVY)
+        tab_r = tab_l = ''
         if k in TABS:
             i = TABS.index(k)
-            tab = ' @right-top{content:"%s";height:%smm;margin-top:%smm;background:%s;color:#fff;font:700 7.6pt P;letter-spacing:.6pt;text-align:center;vertical-align:middle;border-radius:2mm 0 0 2mm;writing-mode:vertical-rl}\n' % (tab_label(k), TAB_H, TAB_TOP + i * TAB_STEP, badge)
-        out.append('''@page %(k)s{
- @top-left-corner{content:"";margin-bottom:9mm;background:%(badge)s}
- @top-left{content:"%(num)s";width:8mm;margin-bottom:9mm;background:%(badge)s;font:700 %(nsz)s P;color:#fff;text-align:left;text-indent:%(ind)s;white-space:nowrap;vertical-align:middle}
- @top-center{content:"%(title)s";width:178mm;margin-bottom:9mm;background:%(navy)s;font:700 10pt P;color:#fff;text-align:left;vertical-align:middle;padding-left:6mm}
- @top-right{content:"";width:8mm;margin-bottom:9mm;background:%(navy)s}
- @top-right-corner{content:"";margin-bottom:9mm;background:%(navy)s}
-}
-@page %(k)s:right{
-%(tab)s @bottom-left{content:"%(foot)s";width:120mm;text-align:left;font:500 7.5pt P;color:#8a94a3;padding-left:10mm;vertical-align:middle}
- @bottom-right{content:counter(page);width:60mm;text-align:right;font:700 8.5pt P;color:%(navy)s;padding-right:10mm;vertical-align:middle}
+            t = 'content:"%s";height:%smm;margin-top:%smm;background:%s;color:#fff;font:700 7.6pt P;letter-spacing:.6pt;text-align:center;vertical-align:middle;writing-mode:vertical-rl' % (tab_label(k), TAB_H, TAB_TOP + i * TAB_STEP, badge)
+            tab_r = ' @right-top{%s;border-radius:2mm 0 0 2mm}\n' % t
+            tab_l = ' @left-top{%s;border-radius:0 2mm 2mm 0}\n' % t
+        foot = 'font:500 7.5pt P;color:#8a94a3;vertical-align:middle'
+        pnum = 'font:700 8.5pt P;color:%s;vertical-align:middle' % NAVY
+        out.append('''@page %(k)s:right{
+ margin:21mm %(O)smm 15mm %(G)smm;
+ @top-left-corner{content:"";%(box)s;background:%(navy)s}
+ @top-left{%(ttl)s;padding-left:10mm}
+ @top-right{content:"";width:%(O)smm;%(box)s;background:%(badge)s}
+ @top-right-corner{content:"%(num)s";%(box)s;background:%(badge)s;%(ns)s;text-indent:-%(il)smm}
+%(tabr)s @bottom-left{content:"%(foot)s";width:120mm;text-align:left;padding-left:10mm;%(fs)s}
+ @bottom-right{content:counter(page);width:40mm;text-align:right;padding-right:10mm;%(ps)s}
 }
 @page %(k)s:left{
-%(ltab)s @bottom-left{content:counter(page);width:60mm;text-align:left;font:700 8.5pt P;color:%(navy)s;padding-left:10mm;vertical-align:middle}
- @bottom-right{content:"%(foot)s";width:120mm;text-align:right;font:500 7.5pt P;color:#8a94a3;padding-right:10mm;vertical-align:middle}
-}''' % dict(k=k, num=num, title=title, badge=badge, navy=NAVY, tab=tab, ltab=tab.replace('@right-top', '@left-top').replace('border-radius:2mm 0 0 2mm', 'border-radius:0 2mm 2mm 0'), foot=FOOT, ind=IND.get(num, '-3.2mm'),
-            nsz='10.5pt' if len(num) <= 2 else '7.5pt'))
+ margin:21mm %(G)smm 15mm %(O)smm;
+ @top-left-corner{content:"";%(box)s;background:%(badge)s}
+ @top-left{content:"%(num)s";width:%(O)smm;%(box)s;background:%(badge)s;%(ns)s;text-indent:-%(il)smm}
+ @top-center{%(ttl)s;padding-left:6mm}
+ @top-right-corner{content:"";%(box)s;background:%(navy)s}
+%(tabl)s @bottom-left{content:counter(page);width:40mm;text-align:left;padding-left:10mm;%(ps)s}
+ @bottom-right{content:"%(foot)s";width:120mm;text-align:right;padding-right:10mm;%(fs)s}
+}''' % dict(k=k, num=num, navy=NAVY, badge=badge, box=box, ttl=ttl, ns=numstyle, O=OUTER, G=GUTTER,
+              ir=round(OUTER - half, 1), il=round(half, 1), tabr=tab_r, tabl=tab_l, foot=FOOT, fs=foot, ps=pnum))
     return '\n'.join(out)
 
 
