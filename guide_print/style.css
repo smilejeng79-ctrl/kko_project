@@ -169,3 +169,14 @@ h5.ftitle{text-align:center;font-size:13pt;font-weight:800;color:var(--navy);mar
 .form{break-inside:avoid}
 .fh{break-after:avoid}
 .form:not(.fpage) .fb table{break-inside:avoid}
+/* v3: binding layout, tabs, subsection pages */
+@page{size:A4;margin:21mm 8mm 15mm 0}
+.area{padding:0 10mm 0 18mm}
+h2.sub{break-before:page}
+.dv-tab{position:absolute;right:0;width:8mm;background:rgba(255,255,255,.92);border-radius:2mm 0 0 2mm;writing-mode:vertical-rl;text-align:center;font-weight:800;font-size:7.6pt;letter-spacing:.6pt;display:flex;align-items:center;justify-content:center}
+.dv-badges{display:flex;gap:2mm;margin:-1mm 0 6mm}
+.dv-badge{display:inline-flex;align-items:center;gap:1.6mm;background:rgba(255,255,255,.16);border-radius:10mm;padding:1mm 3.2mm;font-size:8.5pt;font-weight:700;color:#fff}
+.dv-badge i{width:2.4mm;height:2.4mm;border-radius:50%;display:inline-block}
+.dv-label{letter-spacing:3pt}
+.dv-secs{font-weight:600}
+.cal td{padding:1.1mm 0}.cal td:first-child{padding-left:3mm}

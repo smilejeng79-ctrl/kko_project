@@ -28,17 +28,38 @@ def rich(s):
     return s
 
 
+TABS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'ap']
+TABNAME = {'a1': '관리체계', 'a2': '위험성평가', 'a3': '비상대응', 'a4': '작업환경측정', 'a5': '건강검진', 'a6': '안전보건교육', 'a7': '현장조치', 'ap': '부록'}
+TAB_TOP, TAB_STEP, TAB_H = 6, 31.5, 29   # mm, measured from the bottom edge of the header margin (21mm)
+FOOT = '소규모 제조업 산업안전보건법 준수사항 안내'
+
+
+def tab_label(k):
+    num = AREAS[k][0]
+    return TABNAME[k] if not num.isdigit() else '%s  %s' % (num, TABNAME[k])
+
+
 def page_css():
     out = []
     for k, (num, title, dark, badge) in AREAS.items():
-        left = num
+        tab = ''
+        if k in TABS:
+            i = TABS.index(k)
+            tab = ' @right-top{content:"%s";height:%smm;margin-top:%smm;background:%s;color:#fff;font:700 7.6pt P;letter-spacing:.6pt;text-align:center;vertical-align:middle;border-radius:2mm 0 0 2mm;writing-mode:vertical-rl}\n' % (tab_label(k), TAB_H, TAB_TOP + i * TAB_STEP, badge)
         out.append('''@page %(k)s{
  @top-left{content:"%(num)s";width:16mm;margin-bottom:9mm;background:%(badge)s;font:700 %(nsz)s P;color:#fff;text-align:center;vertical-align:middle}
- @top-center{content:"%(title)s";width:178mm;margin-bottom:9mm;background:%(navy)s;font:700 10pt P;color:#fff;text-align:left;vertical-align:middle;padding-left:6mm}
+ @top-center{content:"%(title)s";width:170mm;margin-bottom:9mm;background:%(navy)s;font:700 10pt P;color:#fff;text-align:left;vertical-align:middle;padding-left:6mm}
  @top-right{content:"";width:16mm;margin-bottom:9mm;background:%(navy)s}
- @bottom-left{content:"소규모 제조업 산업안전보건법 준수사항 안내";font:500 7.5pt P;color:#8a94a3;padding-left:18mm;vertical-align:middle}
- @bottom-right{content:counter(page);font:700 8.5pt P;color:%(navy)s;padding-right:18mm;vertical-align:middle}
-}''' % dict(k=k, num=num, title=title, badge=badge, navy=NAVY,
+ @top-right-corner{content:"";margin-bottom:9mm;background:%(navy)s}
+%(tab)s}
+@page %(k)s:right{
+ @bottom-left{content:"%(foot)s";width:120mm;text-align:left;font:500 7.5pt P;color:#8a94a3;padding-left:18mm;vertical-align:middle}
+ @bottom-right{content:counter(page);width:60mm;text-align:right;font:700 8.5pt P;color:%(navy)s;padding-right:10mm;vertical-align:middle}
+}
+@page %(k)s:left{
+ @bottom-left{content:counter(page);width:60mm;text-align:left;font:700 8.5pt P;color:%(navy)s;padding-left:18mm;vertical-align:middle}
+ @bottom-right{content:"%(foot)s";width:120mm;text-align:right;font:500 7.5pt P;color:#8a94a3;padding-right:10mm;vertical-align:middle}
+}''' % dict(k=k, num=num, title=title, badge=badge, navy=NAVY, tab=tab, foot=FOOT,
             nsz='10.5pt' if len(num) <= 2 else '7.5pt'))
     return '\n'.join(out)
 
@@ -56,18 +77,25 @@ class B:
         return '\n'.join(self.parts)
 
 
-def divider(key, title_lines, sub, intro, sections):
+BADGE_DOT = {'red': '#ff6b57', 'orange': '#ffb347', 'bolt': '#ffd27a', 'plain': None}
+
+
+def divider(key, title_lines, badges, sub_lines, box, bottom):
     num, title, dark, badge = AREAS[key]
-    big = num if num.isdigit() is False else str(int(num))
+    big = str(int(num)) if num.isdigit() else num
+    label = 'AREA&nbsp;&nbsp;%s' % num if num.isdigit() else 'APPENDIX'
     t = '<br>'.join(e(x) for x in title_lines)
-    secs = '<span class="dot">·</span>'.join('<span>%s</span>' % e(s) for s in sections)
-    label = 'AREA %s' % num if num.isdigit() else 'APPENDIX'
+    bd = ''.join('<span class="dv-badge">%s%s</span>' % ('<i style="background:%s"></i>' % BADGE_DOT[c] if BADGE_DOT[c] else '', e(txt)) for c, txt in badges)
+    bd = '<div class="dv-badges">%s</div>' % bd if bd else ''
+    sub = '<br>'.join(rich(x) for x in sub_lines)
+    i = TABS.index(key)
+    tab = '<div class="dv-tab" style="top:%smm;height:%smm;color:%s">%s</div>' % (21 + TAB_TOP + i * TAB_STEP, TAB_H, dark, e(tab_label(key)))
     return '''<section class="divider" style="background:%s">
-<div class="big">%s</div>
+<div class="big">%s</div>%s
 <div class="dv-in"><div class="dv-label">%s</div><div class="dv-line"></div>
-<h1>%s</h1><p class="dv-sub">%s</p></div>
+<h1>%s</h1>%s<p class="dv-sub">%s</p></div>
 <div class="dv-box">%s</div>
-<div class="dv-secs">%s</div></section>''' % (dark, e(big), label, t, rich(sub), rich(intro), secs)
+<div class="dv-secs">%s</div></section>''' % (dark, e(big), tab, label, t, bd, sub, rich(box), rich(bottom))
 
 
 def area_open(key):
@@ -194,4 +222,4 @@ def h4(text):
 
 def raw(s):
     return s
-SP = '<div class="sp"></div>'
+SP = ''
