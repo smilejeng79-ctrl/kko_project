@@ -180,3 +180,28 @@ h2.sub{break-before:page}
 .dv-label{letter-spacing:3pt}
 .dv-secs{font-weight:600}
 .cal td{padding:1.1mm 0}.cal td:first-child{padding-left:3mm}
+/* v4: divider header matched to reference (pt measured) */
+.dv-in,.dv-tab{display:none}
+.divider .big{position:absolute;right:-24pt;top:-6pt;left:auto;font-size:300pt;line-height:1;font-weight:800;color:rgba(255,255,255,.12)}
+.divider .big.wide{font-size:150pt;top:40pt;right:18pt}
+.dv-label{position:absolute;left:49.8pt;top:76.5pt;font-size:10.3pt;font-weight:700;letter-spacing:3.4pt;line-height:1;color:rgba(255,255,255,.82);white-space:nowrap}
+.dv-line{position:absolute;left:49.8pt;top:103pt;width:26pt;height:2.4pt;margin:0;background:rgba(255,255,255,.88)}
+.dv-flow{position:absolute;left:49.8pt;top:125pt;width:120mm}
+.dv-flow h1{margin:0;font-size:36.9pt;line-height:42.8pt;font-weight:800;letter-spacing:-.4pt;color:#fff}
+.dv-flow h1.sm{font-size:35.4pt;line-height:40.6pt}
+.dv-badges{display:flex;gap:6pt;margin:16.3pt 0 0}
+.dv-badge{height:23pt;padding:0 10pt;gap:5pt;font-size:10.3pt;font-weight:700;background:rgba(0,0,0,.16);border-radius:12pt;display:inline-flex;align-items:center;color:#fff}
+.dv-badge i{width:9pt;height:9pt;border-radius:50%}
+.dv-sub{margin:17.4pt 0 0;font-size:12.15pt;line-height:19.1pt;color:rgba(255,255,255,.92);max-width:none}
+.dv-sub.nb{margin-top:19.8pt}
+.dv-sub b{color:#fff;font-weight:700}
+.dv-label{top:78pt;letter-spacing:4pt}
+.dv-flow{top:125.4pt}
+.dv-badges{gap:4pt}
+.dv-badge{padding:0 10.3pt;gap:5.4pt}
+.dv-badge i{width:11pt;height:11pt}
+.dv-sub{margin-top:17.6pt}.dv-sub.nb{margin-top:19.9pt}
+.dv-badges{gap:6.5pt}
+.dv-line{width:36pt}
+.divider .big{top:16pt;right:-29pt}
+.dv-badge{background:rgba(0,0,0,.2)}

@@ -77,25 +77,25 @@ class B:
         return '\n'.join(self.parts)
 
 
-BADGE_DOT = {'red': '#ff6b57', 'orange': '#ffb347', 'bolt': '#ffd27a', 'plain': None}
+BOLT = '<svg width="9pt" height="12pt" viewBox="0 0 9 12"><path d="M5.5 0 0 7h3.5L2.5 12 9 4.6H5.4z" fill="#f5a742"/></svg>'
+BADGE_DOT = {'red': 'radial-gradient(circle at 35% 35%,#ff8a8a,#e8344a)', 'orange': 'radial-gradient(circle at 35% 35%,#ffb27a,#ef6a2c)', 'bolt': '#ffd27a', 'plain': None}
 
 
 def divider(key, title_lines, badges, sub_lines, box, bottom):
     num, title, dark, badge = AREAS[key]
     big = str(int(num)) if num.isdigit() else num
-    label = 'AREA&nbsp;&nbsp;%s' % num if num.isdigit() else 'APPENDIX'
+    label = 'AREA&nbsp;%s' % num if num.isdigit() else 'APPENDIX'
+    small = max(len(x) for x in title_lines) >= 6
     t = '<br>'.join(e(x) for x in title_lines)
-    bd = ''.join('<span class="dv-badge">%s%s</span>' % ('<i style="background:%s"></i>' % BADGE_DOT[c] if BADGE_DOT[c] else '', e(txt)) for c, txt in badges)
+    bd = ''.join('<span class="dv-badge">%s%s</span>' % ((BOLT if c == 'bolt' else '<i style="background:%s"></i>' % BADGE_DOT[c]) if BADGE_DOT[c] else '', e(txt)) for c, txt in badges)
     bd = '<div class="dv-badges">%s</div>' % bd if bd else ''
     sub = '<br>'.join(rich(x) for x in sub_lines)
-    i = TABS.index(key)
-    tab = '<div class="dv-tab" style="top:%smm;height:%smm;color:%s">%s</div>' % (21 + TAB_TOP + i * TAB_STEP, TAB_H, dark, e(tab_label(key)))
     return '''<section class="divider" style="background:%s">
-<div class="big">%s</div>%s
-<div class="dv-in"><div class="dv-label">%s</div><div class="dv-line"></div>
-<h1>%s</h1>%s<p class="dv-sub">%s</p></div>
+<div class="big%s">%s</div>
+<div class="dv-label">%s</div><div class="dv-line"></div>
+<div class="dv-flow"><h1 class="%s">%s</h1>%s<p class="dv-sub%s">%s</p></div>
 <div class="dv-box">%s</div>
-<div class="dv-secs">%s</div></section>''' % (dark, e(big), tab, label, t, bd, sub, rich(box), rich(bottom))
+<div class="dv-secs">%s</div></section>''' % (dark, ' wide' if len(big) > 1 else '', e(big), label, 'sm' if small else '', t, bd, ' nb' if not bd else '', sub, rich(box), rich(bottom))
 
 
 def area_open(key):
