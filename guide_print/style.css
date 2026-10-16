@@ -205,3 +205,6 @@ h2.sub{break-before:page}
 .dv-line{width:36pt}
 .divider .big{top:16pt;right:-29pt}
 .dv-badge{background:rgba(0,0,0,.2)}
+/* v5: mirrored tabs — symmetric 8mm side margins */
+@page{size:A4;margin:21mm 8mm 15mm 8mm}
+.area{padding:0 10mm}

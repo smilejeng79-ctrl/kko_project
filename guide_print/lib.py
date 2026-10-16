@@ -31,6 +31,7 @@ def rich(s):
 TABS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'ap']
 TABNAME = {'a1': '관리체계', 'a2': '위험성평가', 'a3': '비상대응', 'a4': '작업환경측정', 'a5': '건강검진', 'a6': '안전보건교육', 'a7': '현장조치', 'ap': '부록'}
 TAB_TOP, TAB_STEP, TAB_H = 6, 31.5, 29   # mm, measured from the bottom edge of the header margin (21mm)
+IND = {'부록': '-2.8mm', 'GUIDE': '-4.6mm'}
 FOOT = '소규모 제조업 산업안전보건법 준수사항 안내'
 
 
@@ -47,19 +48,20 @@ def page_css():
             i = TABS.index(k)
             tab = ' @right-top{content:"%s";height:%smm;margin-top:%smm;background:%s;color:#fff;font:700 7.6pt P;letter-spacing:.6pt;text-align:center;vertical-align:middle;border-radius:2mm 0 0 2mm;writing-mode:vertical-rl}\n' % (tab_label(k), TAB_H, TAB_TOP + i * TAB_STEP, badge)
         out.append('''@page %(k)s{
- @top-left{content:"%(num)s";width:16mm;margin-bottom:9mm;background:%(badge)s;font:700 %(nsz)s P;color:#fff;text-align:center;vertical-align:middle}
- @top-center{content:"%(title)s";width:170mm;margin-bottom:9mm;background:%(navy)s;font:700 10pt P;color:#fff;text-align:left;vertical-align:middle;padding-left:6mm}
- @top-right{content:"";width:16mm;margin-bottom:9mm;background:%(navy)s}
+ @top-left-corner{content:"";margin-bottom:9mm;background:%(badge)s}
+ @top-left{content:"%(num)s";width:8mm;margin-bottom:9mm;background:%(badge)s;font:700 %(nsz)s P;color:#fff;text-align:left;text-indent:%(ind)s;white-space:nowrap;vertical-align:middle}
+ @top-center{content:"%(title)s";width:178mm;margin-bottom:9mm;background:%(navy)s;font:700 10pt P;color:#fff;text-align:left;vertical-align:middle;padding-left:6mm}
+ @top-right{content:"";width:8mm;margin-bottom:9mm;background:%(navy)s}
  @top-right-corner{content:"";margin-bottom:9mm;background:%(navy)s}
-%(tab)s}
+}
 @page %(k)s:right{
- @bottom-left{content:"%(foot)s";width:120mm;text-align:left;font:500 7.5pt P;color:#8a94a3;padding-left:18mm;vertical-align:middle}
+%(tab)s @bottom-left{content:"%(foot)s";width:120mm;text-align:left;font:500 7.5pt P;color:#8a94a3;padding-left:10mm;vertical-align:middle}
  @bottom-right{content:counter(page);width:60mm;text-align:right;font:700 8.5pt P;color:%(navy)s;padding-right:10mm;vertical-align:middle}
 }
 @page %(k)s:left{
- @bottom-left{content:counter(page);width:60mm;text-align:left;font:700 8.5pt P;color:%(navy)s;padding-left:18mm;vertical-align:middle}
+%(ltab)s @bottom-left{content:counter(page);width:60mm;text-align:left;font:700 8.5pt P;color:%(navy)s;padding-left:10mm;vertical-align:middle}
  @bottom-right{content:"%(foot)s";width:120mm;text-align:right;font:500 7.5pt P;color:#8a94a3;padding-right:10mm;vertical-align:middle}
-}''' % dict(k=k, num=num, title=title, badge=badge, navy=NAVY, tab=tab, foot=FOOT,
+}''' % dict(k=k, num=num, title=title, badge=badge, navy=NAVY, tab=tab, ltab=tab.replace('@right-top', '@left-top').replace('border-radius:2mm 0 0 2mm', 'border-radius:0 2mm 2mm 0'), foot=FOOT, ind=IND.get(num, '-3.2mm'),
             nsz='10.5pt' if len(num) <= 2 else '7.5pt'))
     return '\n'.join(out)
 
